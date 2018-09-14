@@ -11,6 +11,7 @@
     <modules>
         <module>uni-user-auth-gateway</module>
         <module>uni-user-auth-eureka</module>
+        <module>uni-user-auth-service-demo</module>
     </modules>
 
     <properties>
