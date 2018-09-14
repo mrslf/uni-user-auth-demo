@@ -1,0 +1,22 @@
+#注册中心服务名
+spring:
+  application:
+    name: eureka-service
+
+#服务端口
+server:
+  port: 5000
+
+
+eureka:
+  instance:
+    #注册中心主机名
+    hostname: localhost
+  client:
+    #是否注册自己
+    register-with-eureka: false
+    #是否检索服务
+    fetch-registry: false
+    service-url:
+      #注册访问
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
