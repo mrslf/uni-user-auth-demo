@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: sso-server
+
+server:
+  port: 5400
+
