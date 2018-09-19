@@ -12,6 +12,7 @@
         <module>uni-user-auth-gateway</module>
         <module>uni-user-auth-eureka</module>
         <module>uni-user-auth-service-demo</module>
+        <module>uni-user-auth-oracle</module>
         <module>uni-user-auth-sso</module>
         <module>uni-user-auth-oauth2</module>
     </modules>
