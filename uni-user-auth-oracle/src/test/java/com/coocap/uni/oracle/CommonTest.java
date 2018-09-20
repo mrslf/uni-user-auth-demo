@@ -123,4 +123,11 @@ public class CommonTest {
         testCycleTransactionService.testTransaction();
     }
 
+    @Test
+    public void testCycle(){
+
+        testCycleTransactionService.testCycle();
+
+    }
+
 }

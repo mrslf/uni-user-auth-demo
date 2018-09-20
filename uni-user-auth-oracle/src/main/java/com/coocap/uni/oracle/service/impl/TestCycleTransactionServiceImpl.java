@@ -67,4 +67,24 @@ public class TestCycleTransactionServiceImpl implements TestCycleTransactionServ
         throw new NumberFormatException();
 
     }
+
+    @Override
+    @Transactional
+    public void testCycle() {
+        for (;;){
+            List<TestCycleTransaction> testCycleTransactions = testCycleTransactionMapper.selectBatch();
+            if (testCycleTransactions.size() <= 0){
+                break;
+            }
+
+            for (TestCycleTransaction testCycleTransaction : testCycleTransactions) {
+                testCycleTransaction.setStatus(1);
+                testCycleTransactionMapper.update(testCycleTransaction);
+            }
+        }
+
+        System.out.println("break");
+    }
+
+
 }

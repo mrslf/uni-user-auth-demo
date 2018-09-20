@@ -31,4 +31,7 @@ public interface TestCycleTransactionMapper {
 
     @Update({"update TEST_CYCLE_TRANSACTION set NAME = #{name,jdbcType=VARCHAR}, SEX = #{sex,jdbcType=DECIMAL}, AGE = #{age,jdbcType=DECIMAL}, STATUS = #{status,jdbcType=DECIMAL}, UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP} where ID = #{id,jdbcType=DECIMAL}"})
     int update(TestCycleTransaction record);
+
+    @Select({"select * from TEST_CYCLE_TRANSACTION where status=0 and rownum <= 10"})
+    List<TestCycleTransaction> selectBatch();
 }

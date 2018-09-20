@@ -8,4 +8,6 @@ public interface TestCycleTransactionService {
 
     void testTransaction();
 
+    void testCycle();
+
 }
