@@ -44,7 +44,7 @@ public class TestCycleTransactionServiceImpl implements TestCycleTransactionServ
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public void update() {
 
         List<TestCycleTransaction> testCycleTransactions = testCycleTransactionMapper.selectAll();
@@ -58,9 +58,13 @@ public class TestCycleTransactionServiceImpl implements TestCycleTransactionServ
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public void testTransaction() {
         update();
         testUserService.insert();
+        
+        System.out.println("finish");
+        throw new NumberFormatException();
+
     }
 }
