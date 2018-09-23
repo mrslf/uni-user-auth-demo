@@ -2,6 +2,7 @@ package com.coocap.uni.oracle.service.impl;
 
 import com.coocap.uni.oracle.entity.TestUser;
 import com.coocap.uni.oracle.mapper.TestUserMapper;
+import com.coocap.uni.oracle.service.TestUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

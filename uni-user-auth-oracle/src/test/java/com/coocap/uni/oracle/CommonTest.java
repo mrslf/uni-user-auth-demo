@@ -130,4 +130,14 @@ public class CommonTest {
 
     }
 
+    @Test
+    public void testUpdateList(){
+
+        List<TestCycleTransaction> testCycleTransactions = testCycleTransactionMapper.selectAll();
+
+
+        testCycleTransactionMapper.updateList(testCycleTransactions);
+
+    }
+
 }

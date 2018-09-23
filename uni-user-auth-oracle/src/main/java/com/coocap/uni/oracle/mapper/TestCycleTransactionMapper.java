@@ -34,4 +34,14 @@ public interface TestCycleTransactionMapper {
 
     @Select({"select * from TEST_CYCLE_TRANSACTION where status=0 and rownum <= 10"})
     List<TestCycleTransaction> selectBatch();
+
+    @Update({
+        "<script>"
+        + "UPDATE TEST_CYCLE_TRANSACTION SET STATUS = 1 WHERE ID in "
+        + "<foreach item='item' index='index' collection='list' open='(' separator=',' close=')'>"
+        + "#{item.id,jdbcType=DECIMAL}"
+        + "</foreach>"
+        + "</script>"
+    })
+    void updateList(List<TestCycleTransaction> testCycleTransactionList);
 }
