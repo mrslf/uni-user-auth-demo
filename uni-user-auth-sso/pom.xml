@@ -14,6 +14,8 @@
     <modules>
         <module>uni-user-auth-sso-client</module>
         <module>uni-user-auth-sso-server</module>
+        <module>uni-user-auth-sso-client-system1</module>
+        <module>uni-user-auth-sso-client-system2</module>
     </modules>
 
 

@@ -1,12 +1,9 @@
-package com.coocap.uni.sso.client.Config;
+package com.coocap.uni.sso.client.filter;
 
 
 import com.alibaba.fastjson.JSONObject;
 import com.coocap.uni.sso.client.common.Constants;
 import com.coocap.uni.sso.client.common.HttpClientUtils;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClients;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +31,11 @@ public class LoginFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
 
-        if ((boolean) session.getAttribute(Constants.LOGIN_FLAG)) {
+        //访问地址
+        String redirectUrl = req.getRequestURL().toString();
+        Object object = session.getAttribute(Constants.LOGIN_FLAG);
+
+        if (object != null && (boolean) object) {
             chain.doFilter(request, response);
             return;
         }
@@ -45,15 +46,16 @@ public class LoginFilter implements Filter {
             // 去sso认证中心校验token
             boolean verifyResult = this.verify(ssoServerVerifyUrl, token);
             if (!verifyResult) {
-                res.sendRedirect(ssoServerLoginUrl);
+                res.sendRedirect(ssoServerLoginUrl + "?rediectUrl=" + redirectUrl);
                 return;
             }
             session.setAttribute(Constants.LOGIN_FLAG, true);
             chain.doFilter(request, response);
+            return;
         }
 
         //跳转至sso认证中心
-        res.sendRedirect(ssoServerLoginUrl);
+        res.sendRedirect(ssoServerLoginUrl + "?rediectUrl=" + redirectUrl);
 
     }
 

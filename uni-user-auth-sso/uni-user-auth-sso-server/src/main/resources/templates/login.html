@@ -57,6 +57,8 @@
                     layer.msg("登录成功", {time : 2000}, function(){
                         if (redirect_url != null && redirect_url != '') {
                             window.location.href = redirect_url + "?token=" + data.token;
+						} else {
+                            window.location.href = "http://localhost:5400/index";
 						}
 					});
 				} else {

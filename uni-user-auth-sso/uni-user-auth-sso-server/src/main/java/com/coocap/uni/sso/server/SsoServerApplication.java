@@ -1,6 +1,7 @@
 package com.coocap.uni.sso.server;
 
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date  
  */
 @SpringBootApplication
+@MapperScan(basePackages = {"com.coocap.uni.sso.server.mapper","com.coocap.uni.sso.server.mapper.**"})
 public class SsoServerApplication {
 
     /**
