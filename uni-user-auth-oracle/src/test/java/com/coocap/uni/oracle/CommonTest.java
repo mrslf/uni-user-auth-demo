@@ -3,6 +3,8 @@ package com.coocap.uni.oracle;
 import com.coocap.uni.oracle.entity.TestCycleTransaction;
 import com.coocap.uni.oracle.mapper.TestCycleTransactionMapper;
 import com.coocap.uni.oracle.service.TestCycleTransactionService;
+import com.coocap.uni.oracle.service.TestUserService;
+import com.coocap.uni.oracle.service.TestUserService2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,12 @@ public class CommonTest {
 
     @Autowired
     private TestCycleTransactionService testCycleTransactionService;
+
+    @Autowired
+    private TestUserService testUserService;
+
+    @Autowired
+    private TestUserService2 testUserService2;
 
     @Test
     public void testDataSourceInsert(){
@@ -137,6 +145,13 @@ public class CommonTest {
 
 
         testCycleTransactionMapper.updateList(testCycleTransactions);
+
+    }
+
+    @Test
+    public void testMethodTransaction(){
+
+        testUserService2.update();
 
     }
 

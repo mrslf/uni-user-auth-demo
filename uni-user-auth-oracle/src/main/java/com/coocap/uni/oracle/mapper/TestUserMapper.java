@@ -3,6 +3,8 @@ package com.coocap.uni.oracle.mapper;
 import com.coocap.uni.oracle.entity.TestUser;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 public interface TestUserMapper {
     @Insert({
@@ -15,4 +17,7 @@ public interface TestUserMapper {
 
     @InsertProvider(type=TestUserSqlProvider.class, method="insertSelective")
     int insertSelective(TestUser record);
+
+    @Update({"update TEST_USER set USERNAME=#{username,jdbcType=VARCHAR}, PASSWORD=#{password,jdbcType=VARCHAR} where ID=#{id,jdbcType=VARCHAR}"})
+    int update(TestUser record);
 }
