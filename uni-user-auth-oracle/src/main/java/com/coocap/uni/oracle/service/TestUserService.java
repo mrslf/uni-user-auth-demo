@@ -4,6 +4,8 @@ package com.coocap.uni.oracle.service;
 
 public interface TestUserService {
 
-    void insert();
+    void update1();
+
+    void update2();
 
 }

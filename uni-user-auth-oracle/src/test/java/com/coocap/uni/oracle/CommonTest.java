@@ -149,9 +149,9 @@ public class CommonTest {
     }
 
     @Test
-    public void testMethodTransaction(){
+    public void testDBDefault(){
 
-        testUserService2.update();
+        testUserService.update2();
 
     }
 

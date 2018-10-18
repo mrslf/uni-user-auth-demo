@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
+
 public class TestUserService2Impl implements TestUserService2 {
 
     @Autowired
@@ -21,18 +22,18 @@ public class TestUserService2Impl implements TestUserService2 {
     private TestUserService testUserService;
 
     @Override
-    public void update() {
-
+    @Transactional(propagation = Propagation.NESTED)
+    public void update3() {
         TestUser testUser = new TestUser();
-
-        testUser.setId(5);
-        testUser.setUsername("update5552");
-        testUser.setPassword("update5552");
+        testUser.setId(3);
+        testUser.setUsername("username3");
+        testUser.setPassword("password3");
         testUser.setCreateTime(new Date());
 
         testUserMapper.update(testUser);
 
-        testUserService.insert();
+        System.out.println("service update3执行完成");
 
+        throw new NumberFormatException("update1随便抛的一个异常");
     }
 }

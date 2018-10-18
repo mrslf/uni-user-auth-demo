@@ -18,6 +18,6 @@ public interface TestUserMapper {
     @InsertProvider(type=TestUserSqlProvider.class, method="insertSelective")
     int insertSelective(TestUser record);
 
-    @Update({"update TEST_USER set USERNAME=#{username,jdbcType=VARCHAR}, PASSWORD=#{password,jdbcType=VARCHAR} where ID=#{id,jdbcType=VARCHAR}"})
+    @Update({"update TEST_USER set USERNAME=#{username,jdbcType=VARCHAR}, PASSWORD=#{password,jdbcType=VARCHAR}, CREATE_TIME=#{createTime,jdbcType=TIMESTAMP} where ID=#{id,jdbcType=VARCHAR}"})
     int update(TestUser record);
 }

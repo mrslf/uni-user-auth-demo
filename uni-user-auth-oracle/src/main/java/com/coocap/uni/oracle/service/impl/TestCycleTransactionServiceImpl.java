@@ -61,7 +61,7 @@ public class TestCycleTransactionServiceImpl implements TestCycleTransactionServ
     @Transactional
     public void testTransaction() {
         update();
-        testUserService.insert();
+        testUserService.update1();
         
         System.out.println("finish");
         throw new NumberFormatException();
