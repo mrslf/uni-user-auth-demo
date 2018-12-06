@@ -3,13 +3,16 @@ package com.coocap.uni.sso.client.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.coocap.uni.sso.client.common.Constants;
-import com.coocap.uni.sso.client.common.HttpClientUtils;
+import com.coocap.uni.sso.client.common.HttpUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginFilter implements Filter {
 
@@ -46,7 +49,7 @@ public class LoginFilter implements Filter {
             // 去sso认证中心校验token
             boolean verifyResult = this.verify(ssoServerVerifyUrl, token);
             if (!verifyResult) {
-                res.sendRedirect(ssoServerLoginUrl + "?rediectUrl=" + redirectUrl);
+                res.sendRedirect(ssoServerLoginUrl + "?redirectUrl=" + redirectUrl);
                 return;
             }
             session.setAttribute(Constants.LOGIN_FLAG, true);
@@ -55,7 +58,7 @@ public class LoginFilter implements Filter {
         }
 
         //跳转至sso认证中心
-        res.sendRedirect(ssoServerLoginUrl + "?rediectUrl=" + redirectUrl);
+        res.sendRedirect(ssoServerLoginUrl + "?redirectUrl=" + redirectUrl);
 
     }
 
@@ -65,12 +68,12 @@ public class LoginFilter implements Filter {
      * @param token
      * @return
      */
-    private boolean verify(String ssoServerVerifyUrl, String token) {
+    private boolean verify(String ssoServerVerifyUrl, String token) throws UnsupportedEncodingException {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("token", token);
-        JSONObject result = HttpClientUtils.httpPost(ssoServerVerifyUrl, jsonObject);
-        if ("200".equals(result.getString("code"))){
+        Map<String, String> paramMap = new HashMap<>(2);
+        paramMap.put("token", token);
+        String result = HttpUtil.httpPostRequest(ssoServerVerifyUrl, paramMap);
+        if ("200".equals(JSONObject.parseObject(result).getString("code"))){
             return true;
         } else {
             return false;
