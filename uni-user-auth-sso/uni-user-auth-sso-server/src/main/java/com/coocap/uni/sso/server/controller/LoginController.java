@@ -43,6 +43,9 @@ public class LoginController {
     @RequestMapping("/index")
     public String loginIndex(String redirectUrl, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        //登录页
+        System.out.println("登录页jsessionId:" + request.getSession().getId());
+
         //已登录返回token
         Object o = request.getSession().getAttribute(Constants.LOGIN_FLAG);
         if (o == null || !(boolean)o){
@@ -52,7 +55,7 @@ public class LoginController {
             return "login";
         } else {
             TestUser testUser = (TestUser)request.getSession().getAttribute(Constants.USER_INFO);
-            response.sendRedirect(redirectUrl);
+            response.sendRedirect(redirectUrl + "?token=" + testUser.getToken());
             return null;
         }
     }
@@ -67,6 +70,9 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject login(String username, String password,String redirectUrl, HttpServletRequest request){
+
+        //登录提交
+        System.out.println("登录提交jsessionId:" + request.getSession().getId());
 
         JSONObject result = new JSONObject();
 
@@ -92,6 +98,9 @@ public class LoginController {
     @RequestMapping(value = "/verify", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject verify(String token, HttpServletRequest request){
+
+        //token验证
+        System.out.println("登录验证jsessionId:" + request.getSession().getId());
 
         JSONObject result = new JSONObject();
         Object object = request.getSession().getAttribute(Constants.LOGIN_FLAG);

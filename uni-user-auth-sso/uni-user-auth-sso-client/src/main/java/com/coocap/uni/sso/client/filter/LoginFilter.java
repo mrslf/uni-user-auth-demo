@@ -33,6 +33,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
+        System.out.println("客户端jsessionId:" + req.getSession().getId());
 
         //访问地址
         String redirectUrl = req.getRequestURL().toString();
